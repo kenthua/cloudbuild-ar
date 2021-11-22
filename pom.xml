@@ -16,7 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-        <project-id>kenthua-test-standalone</project-id>
+        <project-id>${env.PROJECT_ID}</project-id>
 	</properties>
 
 	<dependencies>
