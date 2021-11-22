@@ -16,6 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+        <project-id>kenthua-test-standalone</project-id>
 	</properties>
 
 	<dependencies>
@@ -43,17 +44,17 @@
     <distributionManagement>
         <snapshotRepository>
         <id>artifact-registry</id>
-        <url>artifactregistry://us-maven.pkg.dev/kenthua-test-standalone/core-build</url>
+        <url>artifactregistry://us-maven.pkg.dev/${project-id}/core-build</url>
         </snapshotRepository>
         <repository>
         <id>artifact-registry</id>
-        <url>artifactregistry://us-maven.pkg.dev/kenthua-test-standalone/core-build</url>
+        <url>artifactregistry://us-maven.pkg.dev/${project-id}/core-build</url>
         </repository>
     </distributionManagement>
     <repositories>
         <repository>
         <id>artifact-registry</id>
-        <url>artifactregistry://us-maven.pkg.dev/kenthua-test-standalone/core-build</url>
+        <url>artifactregistry://us-maven.pkg.dev/${project-id}/core-build</url>
         <releases>
             <enabled>true</enabled>
         </releases>
@@ -78,7 +79,7 @@
                 <version>3.1.4</version>
                 <configuration>
                     <to>
-                        <image>us-docker.pkg.dev/kenthua-test-standalone/core-image/spring-boot-app</image>
+                        <image>us-docker.pkg.dev/${project-id}/core-image/spring-boot-app</image>
                         <tags>
                             <tag>${project.version}</tag>
                             <tag>latest</tag>
