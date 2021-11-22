@@ -1,0 +1,10 @@
+steps:
+- name: gcr.io/cloud-builders/mvn
+  entrypoint: mvn
+  args: ['test']
+- name: gcr.io/cloud-builders/mvn
+  args: ['deploy']
+- name: gcr.io/cloud-builders/mvn
+  args:
+  - "compile"
+  - "jib:build"
