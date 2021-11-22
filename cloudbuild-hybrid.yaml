@@ -1,0 +1,26 @@
+steps:
+- name: gcr.io/cloud-builders/mvn
+  id: test
+  entrypoint: mvn
+  env:
+  - "PROJECT_ID=${PROJECT_ID}"
+  args: ['test']
+- name: gcr.io/cloud-builders/mvn
+  id: deploy
+  env:
+  - "PROJECT_ID=${PROJECT_ID}"
+  args: 
+  - "deploy"
+  - "-Dmaven.test.skip=true"
+- name: gcr.io/cloud-builders/mvn
+  id: containerize
+  env:
+  - "PROJECT_ID=${PROJECT_ID}"
+  args:
+  - "compile"
+  - "jib:build"
+substitutions:
+  _CLUSTER_NAME: cluster-1
+options:
+  anthosCluster:
+    membership: projects/${PROJECT_NUMBER}/locations/global/memberships/${_CLUSTER_NAME}
