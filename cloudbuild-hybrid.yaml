@@ -37,15 +37,14 @@ steps:
     gcloud container hub memberships get-credentials ${_CLUSTER_NAME}
 - name: gcr.io/k8s-skaffold/skaffold:v1.35.0
   id: skaffold_deploy
+  entrypoint: /bin/sh
   args:
-  - skaffold
-  - deploy
-  - "--profile"
-  - "abm"
-  - "--kubeconfig"
-  - "/workspace/cgw-kubeconfig"
-  - "--tag"
-  - "${SHORT_SHA}"
+  - "-c"
+  - |
+    skaffold deploy \
+    --profile abm \
+    --kubeconfig /workspace/cgw-kubeconfig \
+    --tag ${SHORT_SHA}
 # - name: gcr.io/cloud-builders/gcloud
 #   id: k8s_deploy
 #   entrypoint: /bin/sh
