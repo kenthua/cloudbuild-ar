@@ -17,6 +17,8 @@
 	<properties>
 		<java.version>1.8</java.version>
         <project-id>${env.PROJECT_ID}</project-id>
+        <build-id>${env.BUILD_ID}</build-id>
+        <short-sha>${env.SHORT_SHA}</short-sha>
 	</properties>
 
 	<dependencies>
@@ -83,6 +85,7 @@
                         <tags>
                             <tag>${project.version}</tag>
                             <tag>latest</tag>
+                            <tag>${short-sha}</tag>
                         </tags>
                     </to>
                 </configuration>

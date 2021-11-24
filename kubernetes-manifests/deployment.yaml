@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: us-docker.pkg.dev/kenthua-test-standalone/core-image/spring-boot-app
+        image: us-docker.pkg.dev/kenthua-test-identity/core-image/spring-boot-app
         ports:
         - name: http-server
           containerPort: 8080
