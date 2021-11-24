@@ -41,6 +41,7 @@ steps:
   args:
   - "-c"
   - |
+    sed -ie "s|cmd-path: /builder/google-cloud-sdk|cmd-path: /google-cloud-sdk|" /workspace/cgw-kubeconfig && \
     skaffold deploy \
     --profile abm \
     --kubeconfig /workspace/cgw-kubeconfig \
