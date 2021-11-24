@@ -7,9 +7,9 @@ build:
     sha256: {}
   # defines where to find the code at build time and where to push the resulting image
   artifacts:
-     - image: us-docker.pkg.dev/kenthua-test-standalone/core-image/spring-boot-app
-       context: .
-       jib: {}
+  - image: us-docker.pkg.dev/kenthua-test-standalone/core-image/spring-boot-app
+    context: .
+    jib: {}
 # defines the Kubernetes manifests to deploy on each run
 deploy:
   kubectl:
@@ -29,3 +29,12 @@ profiles:
 - name: cloudbuild
   build:
     googleCloudBuild: {}
+- name: abm
+  build:
+    artifacts:
+      - image: us-docker.pkg.dev/kenthua-test-identity/core-image/spring-boot-app
+  deploy:
+    kubectl:
+      manifests:
+      - ./kubernetes-manifests/service.yaml
+      - ./kubernetes-manifests/deployment.yaml

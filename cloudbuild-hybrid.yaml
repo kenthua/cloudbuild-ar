@@ -33,15 +33,19 @@ steps:
   args:
   - "-c"
   - |
-    export KUBECONFIG="${pwd}/cgw-kubeconfig" && \
+    export KUBECONFIG="/workspace/cgw-kubeconfig" && \
     gcloud container hub memberships get-credentials ${_CLUSTER_NAME}
-- name: gcr.io/k8s-skaffold/skaffold:v1.34.0
+- name: gcr.io/k8s-skaffold/skaffold:v1.35.0
   id: skaffold_deploy
-  entrypoint: skaffold
   args:
-  - "deploy"
-  - "--tags ${SHORT_SHA}"
-  - "--kubeconfig ${pwd}/cgw-kubeconfig"
+  - skaffold
+  - deploy
+  - "--profile"
+  - "abm"
+  - "--kubeconfig"
+  - "/workspace/cgw-kubeconfig"
+  - "--tag"
+  - "${SHORT_SHA}"
 # - name: gcr.io/cloud-builders/gcloud
 #   id: k8s_deploy
 #   entrypoint: /bin/sh
