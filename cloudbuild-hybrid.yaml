@@ -35,7 +35,7 @@ steps:
   - |
     export KUBECONFIG="${pwd}/cgw-kubeconfig" && \
     gcloud container hub memberships get-credentials ${_CLUSTER_NAME}
-- name: gcr.io/k8s-skaffold/skaffold:v1.24.0
+- name: gcr.io/k8s-skaffold/skaffold:v1.34.0
   id: skaffold_deploy
   entrypoint: skaffold
   args:
