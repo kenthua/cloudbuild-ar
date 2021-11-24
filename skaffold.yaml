@@ -35,6 +35,7 @@ profiles:
       - image: us-docker.pkg.dev/kenthua-test-identity/core-image/spring-boot-app
   deploy:
     kubectl:
+      defaultNamespace: default
       manifests:
       - ./kubernetes-manifests/service.yaml
       - ./kubernetes-manifests/deployment.yaml
