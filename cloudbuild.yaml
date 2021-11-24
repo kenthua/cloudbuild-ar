@@ -4,11 +4,15 @@ steps:
   entrypoint: mvn
   env:
   - "PROJECT_ID=${PROJECT_ID}"
+  - "BUILD_ID=${BUILD_ID}"
+  - "SHORT_SHA=${SHORT_SHA}"
   args: ['test']
 - name: gcr.io/cloud-builders/mvn
   id: deploy
   env:
   - "PROJECT_ID=${PROJECT_ID}"
+  - "BUILD_ID=${BUILD_ID}"
+  - "SHORT_SHA=${SHORT_SHA}"
   args: 
   - "deploy"
   - "-Dmaven.test.skip=true"
@@ -16,6 +20,8 @@ steps:
   id: containerize
   env:
   - "PROJECT_ID=${PROJECT_ID}"
+  - "BUILD_ID=${BUILD_ID}"
+  - "SHORT_SHA=${SHORT_SHA}"
   args:
   - "compile"
   - "jib:build"
