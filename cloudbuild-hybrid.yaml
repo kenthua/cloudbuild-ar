@@ -24,9 +24,9 @@ steps:
   - "SHORT_SHA=${SHORT_SHA}"
   args:
   - "compile"
-  - "jib:build"
-- name: gcr.io/cloud-builders/gcloud
-  id: get_kubeconfig
+  - "jib:build" 
+- name: gcr.io/k8s-skaffold/skaffold:v1.35.0
+  id: skaffold_deploy
   entrypoint: /bin/sh
   env:
   - "PROJECT_ID=${PROJECT_ID}"
@@ -34,14 +34,7 @@ steps:
   - "-c"
   - |
     export KUBECONFIG="/workspace/cgw-kubeconfig" && \
-    gcloud container hub memberships get-credentials ${_CLUSTER_NAME}
-- name: gcr.io/k8s-skaffold/skaffold:v1.35.0
-  id: skaffold_deploy
-  entrypoint: /bin/sh
-  args:
-  - "-c"
-  - |
-    sed -ie "s|cmd-path: /builder/google-cloud-sdk|cmd-path: /google-cloud-sdk|" /workspace/cgw-kubeconfig && \
+    gcloud container hub memberships get-credentials ${_CLUSTER_NAME} && \
     skaffold deploy \
     --profile abm \
     --kubeconfig /workspace/cgw-kubeconfig \
