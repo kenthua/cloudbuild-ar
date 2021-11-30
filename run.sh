@@ -46,7 +46,7 @@ gcloud builds submit \
   --project ${PROJECT_ID}
 
 # hybrid pool
-export CLUSTER_NAME=cluster-1
+export CLUSTER_NAME=user1
 export PROJECT_ID=kenthua-test-identity
 gcloud alpha builds submit \
   --config=cloudbuild-hybrid.yaml \

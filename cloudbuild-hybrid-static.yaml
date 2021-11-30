@@ -7,6 +7,16 @@ steps:
   - "BUILD_ID=${BUILD_ID}"
   - "SHORT_SHA=${SHORT_SHA}"
   args: ['test']
+- name: 'gcr.io/$PROJECT_ID/sonar-scanner:latest'
+  id: "static analysis"
+  args:
+  - '-Dsonar.host.url=https://sonarcloud.io'
+  - '-Dsonar.login=$${SONAR_TOKEN}'
+  - '-Dsonar.projectKey=kenthua_cloudbuild-ar'
+  - '-Dsonar.organization=kenthua'
+  - '-Dsonar.java.source=src'
+  - '-Dsonar.java.binaries=target'
+  secretEnv: ['SONAR_TOKEN']
 - name: gcr.io/cloud-builders/mvn
   id: "push artifacts"
   env:
@@ -52,6 +62,10 @@ steps:
 #     kubectl --kubeconfig ${pwd}/cgw-kubeconfig apply -f kubernetes-manifests/deployment.yaml
 substitutions:
   _CLUSTER_NAME: cluster-1
+availableSecrets:
+  secretManager:
+  - versionName: projects/${PROJECT_ID}/secrets/SONAR_TOKEN/versions/1
+    env: 'SONAR_TOKEN'
 options:
   anthosCluster:
     membership: projects/${PROJECT_NUMBER}/locations/global/memberships/${_CLUSTER_NAME}

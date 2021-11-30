@@ -1,6 +1,6 @@
 steps:
 - name: gcr.io/cloud-builders/mvn
-  id: test
+  id: "unit test"
   entrypoint: mvn
   env:
   - "PROJECT_ID=${PROJECT_ID}"
@@ -8,7 +8,7 @@ steps:
   - "SHORT_SHA=${SHORT_SHA}"
   args: ['test']
 - name: gcr.io/cloud-builders/mvn
-  id: deploy
+  id: "push artifacts"
   env:
   - "PROJECT_ID=${PROJECT_ID}"
   - "BUILD_ID=${BUILD_ID}"
